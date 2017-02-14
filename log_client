@@ -1,0 +1,35 @@
+#!/usr/bin/python
+
+from xmlrpc.client import ServerProxy
+from configparser import ConfigParser
+import os, sys
+from optparse import (OptionParser, BadOptionError, AmbiguousOptionError)
+
+class PassThroughOptionParser( OptionParser):
+    def _process_args( self, largs, rargs, values):
+        while rargs:
+            try:
+                OptionParser._process_args( self, largs, rargs, values)
+            except (BadOptionError, AmbiguousOptionError) as err:
+                largs.append( err.opt_str)
+
+
+usage = "usage: %prog [default, blue, cyan, green, red] message_to_print"
+parser = PassThroughOptionParser( usage = usage)
+(options, args) = parser.parse_args()
+
+if len( args) < 2:
+    parser.error( "Number of arguments cannot be less than 2")
+
+config = ConfigParser()
+config.read( "/etc/log_server.cfg")
+
+server_url = 'http://%s:%s' % (config.get( 'common', 'server_ip'),
+                               config.get( 'common', 'server_port'))
+s = ServerProxy( server_url)
+
+ret = s.Log( args[0], ' '.join( args[1:]))
+
+if ret:
+    sys.exit( 'The server returned an error: %s' % (ret))
+

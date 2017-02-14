@@ -1,0 +1,65 @@
+#!/usr/bin/python
+
+from xmlrpc.server import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCRequestHandler
+from configparser import ConfigParser
+import sys, time
+from enum import Enum
+
+if len( sys.argv) != 1:
+    print ( "Usage: python log_server.py")
+    sys.exit( 0)
+
+config = ConfigParser()
+config.read( "/etc/log_server.cfg")
+
+colour_tags = {
+    'red': '\033[31m',
+    'blue': '\033[34m',
+    'green': '\033[32m',
+    'cyan': '\033[36m'
+}
+
+class control_tags:
+    BOLD = '\033[1m'
+    ENDC = '\033[0m'
+
+def log( colour, text):
+    ctime = time.strftime( "%X", time.localtime())
+
+    if colour == "default":
+        print( "%s: %s" % (ctime, text))
+    elif colour in colour_tags:
+        fmt = '%s: ' + colour_tags[colour] + control_tags.BOLD + '%s' + control_tags.ENDC
+        print( fmt % (ctime, text))
+    else:
+        return "Unknown colour '%s'" % (colour)
+
+    return ''
+
+# Restrict to a particular path.
+class RequestHandler( SimpleXMLRPCRequestHandler):
+        rpc_paths = ( '/RPC2',)
+
+# Create server
+server = SimpleXMLRPCServer( (config.get( 'common', 'server_ip'),
+                             int( config.get( 'common', 'server_port'))),
+                             requestHandler = RequestHandler,
+                             logRequests = False)
+server.register_introspection_functions()
+
+# Register an instance; all the methods of the instance are
+# published as XML-RPC methods.
+class LogServer:
+    def __init__( self):
+        self.cookie = 0x123456;
+        self.refcount = {}
+
+    def Log( self, colour, text):
+        return log( colour, text)
+
+server.register_instance( LogServer())
+
+# Run the server's main loop
+server.serve_forever()
+
