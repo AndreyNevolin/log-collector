@@ -1,14 +1,14 @@
-File splitting utility License Information
+Log Collector License Information
 
-The default license for File splitting utility is the Apache License,
+The default license for Log Collector is the Apache License,
 Version 2.0 (ALv2). The license text can be found at
 http://www.apache.org/licenses/LICENSE-2.0.txt and it is reproduced below.
 "Default" means, unless stated otherwise, ALv2 is the license under which
-File splitting utility is made available to you and it is the license you
-should use when making contributions to this project.
+Log Collector is made available to you and it is the license you should
+use when making contributions to this project.
 
 Please refer to the APPENDIX section below for information on how to document
-the use of the ALv2 in your contributions to File splitting utility.
+the use of the ALv2 in your contributions to Log Collector.
 
                                  Apache License
                            Version 2.0, January 2004
