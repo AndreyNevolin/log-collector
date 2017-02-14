@@ -37,7 +37,9 @@ The tool consists of three components:
 	```log_client colour message_to_print```
 	(or ```python3 /usr/local/bin/log_client colour message_to_print```
 	depending on your environment)
+	
 	```colour``` here is a name of the colour you want to print the message in
+	
 	```message_to_print``` is the message you want to print
 
 Currently only ```default, blue, cyan, green```, and ```red``` colours are
