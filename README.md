@@ -8,7 +8,9 @@ The messages can be printed in different colours.
 ![Log Collector example](/example.png?raw=true "Log Collector at work")
 
 The tool consists of three components:
-1. 'Log server' - a very short Python script (file ```log_server```) that 	brings up a simple HTTP server. The server listens for incoming
+
+1. 'Log server' - a very short Python script (file ```log_server```) that
+	brings up a simple HTTP server. The server listens for incoming
 	text messages and sends them to a console which it was started from
 2. 'Log client' - also a very short Python script (file ```log_client```)
 	that can be used to send messages to the server
