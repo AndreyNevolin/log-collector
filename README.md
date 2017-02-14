@@ -16,8 +16,9 @@ The tool consists of three components:
 	that can be used to send messages to the server
 3. A configuration file (```log_server.cfg```) used by the server and the
 	client to understand what port and IP address the server should be
-	sitting on
+	sitting on.
 	The contents of the file is very simple. E.g:
+	
 	```
 	[common]
 	server_ip=127.0.0.1
