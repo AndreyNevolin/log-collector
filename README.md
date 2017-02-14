@@ -35,7 +35,7 @@ The tool consists of three components:
 	Python 3.x interpreter)
 5. Send message to the server from a different console:
 	```log_client colour message_to_print```
-	(or ```python3 /usr/local/bin/log_client colour message_to_print```
+	(or ```python3 /usr/local/bin/log_client colour message_to_print```,
 	depending on your environment)
 	
 	```colour``` here is a name of the colour you want to print the message in
