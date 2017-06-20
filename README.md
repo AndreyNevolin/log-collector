@@ -1,4 +1,4 @@
-#Log Collector
+# Log Collector
 
 ## Description
 A simple tool that allows collecting - in a single console - text messages
